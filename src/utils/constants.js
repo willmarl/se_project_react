@@ -42,3 +42,10 @@ export const defaultClothingItems = [
     link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKhJ9vY-WJviH34cgDfbG2Hn_cBf0t5BBmaWrmH--NzBO3pjGP6hjV7pb8s958ug9K7p6iR-3vz6nlw7c4i5ZdMw",
   },
 ];
+
+export const coordinates = {
+  latitude: 27.94742,
+  longitude: -82.458778,
+};
+
+export const APIkey = "fe1aea47e5757f2728255ec91d06ae19";
