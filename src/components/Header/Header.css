@@ -16,6 +16,7 @@
   margin-right: 20px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 .header__user-container {
   display: flex;
