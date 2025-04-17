@@ -8,11 +8,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+}
+.modal_opened {
+  visibility: visible;
 }
 .modal__form {
   position: relative;
-  width: 496px;
-  height: 436px;
+  max-width: 496px;
+  max-height: 436px;
+  flex: 1;
   background: #fff;
   border: solid 1px #0000004d;
   border-radius: 20px;
