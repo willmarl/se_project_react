@@ -1,3 +1,75 @@
+export const weatherOptions = [
+  {
+    day: true,
+    condition: "clear",
+    url: new URL("../assets/day/clear.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "clouds",
+    url: new URL("../assets/day/cloudy.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "fog",
+    url: new URL("../assets/day/fog.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "rain",
+    url: new URL("../assets/day/rain.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "snow",
+    url: new URL("../assets/day/snow.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "thunderstorm",
+    url: new URL("../assets/day/storm.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "clear",
+    url: new URL("../assets/night/clear.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "clouds",
+    url: new URL("../assets/night/cloudy.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "fog",
+    url: new URL("../assets/night/fog.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "rain",
+    url: new URL("../assets/night/rain.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "snow",
+    url: new URL("../assets/night/snow.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "thunderstorm",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
+  },
+];
+
+export const defaultWeatherOptions = {
+  day: {
+    url: new URL("../assets/day/default.png", import.meta.url).href,
+  },
+  night: {
+    url: new URL("../assets/night/default.png", import.meta.url).href,
+  },
+};
+
 export const defaultClothingItems = [
   {
     _id: 0,
@@ -35,17 +107,20 @@ export const defaultClothingItems = [
     weather: "cold",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
   },
-  {
-    _id: 6,
-    name: "test",
-    weather: "cold",
-    link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKhJ9vY-WJviH34cgDfbG2Hn_cBf0t5BBmaWrmH--NzBO3pjGP6hjV7pb8s958ug9K7p6iR-3vz6nlw7c4i5ZdMw",
-  },
+  // {
+  //   _id: 6,
+  //   name: "test",
+  //   weather: "warm",
+  //   link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKhJ9vY-WJviH34cgDfbG2Hn_cBf0t5BBmaWrmH--NzBO3pjGP6hjV7pb8s958ug9K7p6iR-3vz6nlw7c4i5ZdMw",
+  // },
 ];
 
 export const coordinates = {
   latitude: 27.94742,
   longitude: -82.458778,
+  //london
+  // latitude: 51.507351,
+  // longitude: -0.127758,
 };
 
 export const APIkey = "fe1aea47e5757f2728255ec91d06ae19";

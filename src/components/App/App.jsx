@@ -38,7 +38,7 @@ function App() {
         console.log(filteredData);
         setWeatherData(filteredData);
       })
-      .catch(console.error());
+      .catch(console.error);
   }, []);
 
   return (
