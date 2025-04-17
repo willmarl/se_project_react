@@ -13,16 +13,18 @@
 .modal_opened {
   visibility: visible;
 }
-.modal__form {
+.modal__content {
   position: relative;
   max-width: 496px;
-  max-height: 436px;
-  flex: 1;
+  width: 100%;
   background: #fff;
   border: solid 1px #0000004d;
-  border-radius: 20px;
-  padding: 28px 28px 36px;
   box-sizing: border-box;
+  padding: 28px 28px 36px;
+  border-radius: 20px;
+}
+.modal__form {
+  max-height: 436px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -42,6 +44,7 @@
 }
 .modal__title {
   margin: 0;
+  margin-bottom: 24px;
   padding: 0;
   font-size: 16px;
 }
