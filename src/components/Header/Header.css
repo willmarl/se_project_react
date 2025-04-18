@@ -20,6 +20,10 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  transition: opacity 0.1s;
+}
+.header__add-clothes-btn:hover {
+  opacity: 0.6;
 }
 .header__user-container {
   display: flex;

@@ -47,6 +47,9 @@
   background-color: transparent;
   cursor: pointer;
 }
+.modal__close:hover {
+  opacity: 1;
+}
 .modal__title {
   margin: 0;
   margin-bottom: 24px;

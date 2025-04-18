@@ -7,7 +7,6 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
 }
 .cards__randomize-btn {
@@ -19,6 +18,7 @@
   }
   .cards__list {
     gap: 15px;
+    justify-content: center;
   }
   .cards__randomize-btn {
     cursor: pointer;

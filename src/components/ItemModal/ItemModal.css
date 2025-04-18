@@ -5,7 +5,13 @@
 .modal__close_type_preview {
   background-image: url(../../assets/close-btn.svg);
   opacity: 1;
+  transition: background-image 0.1s;
 }
+.modal__close_type_preview:hover {
+  opacity: 0.6;
+  background-image: url(../../assets/close-btn-dark.svg);
+}
+
 .modal__image {
   width: 100%;
 }
