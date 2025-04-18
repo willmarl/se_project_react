@@ -21,7 +21,6 @@ function App() {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpened(!isMobileMenuOpened);
-    console.log(`Toggled ${isMobileMenuOpened}`);
   };
 
   const handleCardClick = (card) => {
@@ -36,6 +35,31 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+
+  // wait for modal_opened class to be added before adding event listeners
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (e.target.classList.contains("modal_opened")) {
+        closeActiveModal();
+      }
+    };
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    const currentModal = document.querySelector(".modal_opened");
+    if (currentModal) {
+      document.addEventListener("click", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
+
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+        document.removeEventListener("keydown", handleEscape);
+      };
+    }
+  }, [activeModal !== ""]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
