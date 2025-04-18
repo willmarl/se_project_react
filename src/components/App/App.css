@@ -8,6 +8,7 @@
 .page__content {
   max-width: 1360px;
   margin: 0 auto;
+  padding: 0 16px;
 }
 @media screen and (max-width: 375px) {
   .page__content {
