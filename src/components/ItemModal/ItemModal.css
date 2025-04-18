@@ -2,6 +2,10 @@
   padding: 0;
   overflow: hidden;
 }
+.modal__close_type_preview {
+  background-image: url(../../assets/close-btn.svg);
+  opacity: 1;
+}
 .modal__image {
   width: 100%;
 }
@@ -19,4 +23,18 @@
   margin: 0;
   padding: 0;
   font-size: 20px;
+}
+@media screen and (max-width: 375px) {
+  .modal__content_type_preview {
+    max-width: 343px;
+    width: 100%;
+  }
+  .modal__close_type_preview {
+    background-image: url(../../assets/close-btn-dark.svg);
+    right: 12px;
+    top: 12px;
+  }
+  .modal__footer {
+    margin: 20px 20px 40px;
+  }
 }

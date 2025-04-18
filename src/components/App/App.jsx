@@ -17,6 +17,12 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpened(!isMobileMenuOpened);
+    console.log(`Toggled ${isMobileMenuOpened}`);
+  };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -44,7 +50,12 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+        <Header
+          isMobileMenuOpened={isMobileMenuOpened}
+          toggleMobileMenu={toggleMobileMenu}
+          handleAddClick={handleAddClick}
+          weatherData={weatherData}
+        />
         <Main handleCardClick={handleCardClick} weatherData={weatherData} />
         <Footer />
       </div>

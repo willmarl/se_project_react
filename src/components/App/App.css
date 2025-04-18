@@ -9,3 +9,8 @@
   max-width: 1360px;
   margin: 0 auto;
 }
+@media screen and (max-width: 375px) {
+  .page__content {
+    padding: 18px 16px 20px;
+  }
+}

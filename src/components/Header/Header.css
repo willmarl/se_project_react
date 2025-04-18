@@ -11,8 +11,11 @@
 .header__date-location {
   margin: 0;
 }
-.header__add-clothes-btn {
+.header__nav {
+  display: flex;
   margin-left: auto;
+}
+.header__add-clothes-btn {
   margin-right: 20px;
   border: none;
   background-color: transparent;
@@ -29,4 +32,78 @@
 .header__avatar {
   width: 40px;
   height: 40px;
+}
+.header__mobile-nav-btn {
+  display: none;
+}
+.header__nav__close-btn {
+  display: none;
+}
+
+@media screen and (max-width: 375px) {
+  .header {
+    position: relative;
+  }
+  .header__nav {
+    z-index: 1;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background-color: #fff;
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #0000001a;
+    max-width: 343px;
+    height: 208px;
+    width: 100%;
+    visibility: hidden;
+  }
+
+  .header__nav_opened {
+    visibility: visible;
+  }
+
+  .header__nav__close-btn {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    background-image: url("../../assets/close-btn-dark.svg");
+    background-size: cover;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    top: 11px;
+    right: 11px;
+  }
+  .header__user-container {
+    position: relative;
+  }
+  .header__add-clothes-btn {
+  }
+
+  .header {
+    padding: 0;
+    flex-direction: column;
+    align-items: start;
+    gap: 32px;
+  }
+  .header__mobile-nav-btn {
+    cursor: pointer;
+    position: absolute;
+    padding: 0;
+    display: block;
+    background-image: url("../../assets/mobile-menu.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px #0000001a;
+    width: 44px;
+    height: 44px;
+    right: 0;
+  }
 }

@@ -7,3 +7,8 @@
   margin: 85px 0 24px;
   padding: 0;
 }
+@media screen and (max-width: 375px) {
+  .footer__text {
+    margin: 83px 0 20px;
+  }
+}

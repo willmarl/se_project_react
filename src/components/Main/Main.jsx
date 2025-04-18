@@ -2,6 +2,7 @@ import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import { defaultClothingItems } from "../../utils/constants.js";
 import ItemCard from "../ItemCard/ItemCard.jsx";
+import arrow from "../../assets/circle-arrow.svg";
 
 function Main({ weatherData, handleCardClick }) {
   return (
@@ -13,9 +14,9 @@ function Main({ weatherData, handleCardClick }) {
         </p>
         <ul className="cards__list">
           {defaultClothingItems
-            .filter((item) => {
-              return item.weather === weatherData.type;
-            })
+            // .filter((item) => {
+            //   return item.weather === weatherData.type;
+            // })
             .map((item) => {
               return (
                 <ItemCard
@@ -26,6 +27,14 @@ function Main({ weatherData, handleCardClick }) {
               );
             })}
         </ul>
+        <button className="cards__randomize-btn">
+          <img
+            src={arrow}
+            alt="Randomize button"
+            className="cards__randomize-btn__image"
+          />
+          Randomize
+        </button>
       </section>
     </main>
   );
