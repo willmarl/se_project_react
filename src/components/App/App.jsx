@@ -49,8 +49,8 @@ function App() {
       }
     };
 
-    const currentModal = document.querySelector(".modal_opened");
-    if (currentModal) {
+    // if there is any active modal (it's not an empty string)
+    if (activeModal) {
       document.addEventListener("click", handleClickOutside);
       document.addEventListener("keydown", handleEscape);
 
@@ -59,7 +59,7 @@ function App() {
         document.removeEventListener("keydown", handleEscape);
       };
     }
-  }, [activeModal !== ""]);
+  }, [activeModal]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -85,7 +85,7 @@ function App() {
       <ModalWithForm
         buttonText="Add garment"
         title="New garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
