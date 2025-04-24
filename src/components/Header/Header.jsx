@@ -1,6 +1,7 @@
 import "../Header/Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({
   isMobileMenuOpened,
@@ -34,6 +35,7 @@ function Header({
           type="button"
           className="header__nav__close-btn"
         ></button>
+        <ToggleSwitch />
         <button
           type="button"
           onClick={handleAddClick}
