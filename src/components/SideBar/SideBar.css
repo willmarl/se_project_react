@@ -1,6 +1,6 @@
 .sidebar {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 20px;
 }
 .sidebar__avatar {
@@ -8,7 +8,32 @@
   height: 56px;
 }
 .sidebar__username {
-  margin: 0;
+  margin: 16px 0 0;
   font-weight: 700;
   font-size: 20px;
+}
+.sidebar__mobile-options {
+  margin-top: 12px;
+  visibility: hidden;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  align-items: start;
+}
+.sidebar__mobile-option {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  color: #00000099;
+  cursor: pointer;
+}
+@media screen and (max-width: 375px) {
+  .sidebar {
+    border-top: solid 1px #0000004d;
+    border-bottom: solid 1px #0000004d;
+    padding: 20px 0;
+  }
+  .sidebar__mobile-options {
+    visibility: visible;
+  }
 }

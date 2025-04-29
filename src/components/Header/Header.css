@@ -51,7 +51,19 @@
 @media screen and (max-width: 375px) {
   .header {
     position: relative;
+    padding: 0;
+    justify-content: start;
+    gap: 12px;
   }
+
+  .header__logo {
+    margin: 0;
+  }
+
+  .header__date-location {
+    font-size: 16px;
+  }
+
   .header__nav {
     z-index: 1;
     flex-direction: column-reverse;
@@ -92,12 +104,6 @@
   .header__add-clothes-btn {
   }
 
-  .header {
-    padding: 0;
-    flex-direction: column;
-    align-items: start;
-    gap: 32px;
-  }
   .header__mobile-nav-btn {
     cursor: pointer;
     position: absolute;

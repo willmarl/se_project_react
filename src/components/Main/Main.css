@@ -17,6 +17,9 @@
   display: none;
 }
 @media screen and (max-width: 375px) {
+  .cards {
+    margin-bottom: 83px;
+  }
   .cards__text {
     margin: 0 0 20px;
   }

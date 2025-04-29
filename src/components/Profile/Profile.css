@@ -9,3 +9,10 @@
 .profile__clothes-section {
   width: 100%;
 }
+
+@media screen and (max-width: 375px) {
+  .profile {
+    flex-direction: column;
+    margin: 20px 0 40px;
+  }
+}
