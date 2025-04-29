@@ -1,0 +1,10 @@
+.profile {
+  display: flex;
+}
+.profile__sidebar {
+  max-width: 345px;
+  width: 100%;
+}
+.profile__clothes-section {
+  width: 100%;
+}
