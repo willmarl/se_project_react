@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../Header/Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
@@ -16,7 +17,9 @@ function Header({
 
   return (
     <header className="header">
-      <img src={logo} alt="WTWR Logo" className="header__logo" />
+      <Link to="/">
+        <img src={logo} alt="WTWR Logo" className="header__logo" />
+      </Link>
       <button
         onClick={toggleMobileMenu}
         type="button"
@@ -43,10 +46,15 @@ function Header({
         >
           + Add clothes
         </button>
-        <div className="header__user-container">
-          <p className="header__username">Terrance Tegene</p>
-          <img src={avatar} alt="User's avatar" className="header__avatar" />
-        </div>
+        <Link
+          to="/profile"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="header__user-container">
+            <p className="header__username">Terrance Tegene</p>
+            <img src={avatar} alt="User's avatar" className="header__avatar" />
+          </div>
+        </Link>
       </div>
     </header>
   );

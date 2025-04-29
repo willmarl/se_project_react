@@ -1,3 +1,7 @@
+.cards {
+  margin-bottom: 85px;
+}
+
 .cards__text {
   font-weight: bold;
   margin: 0 0 34px;

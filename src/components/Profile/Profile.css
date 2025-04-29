@@ -1,5 +1,6 @@
 .profile {
   display: flex;
+  margin: 47px 0 80px;
 }
 .profile__sidebar {
   max-width: 345px;

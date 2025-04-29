@@ -1,6 +1,6 @@
 .weather-card {
   position: relative;
-  margin-bottom: 40px;
+  margin: 28px 0 40px;
   display: flex;
   height: 80px;
   border-radius: 12px;
