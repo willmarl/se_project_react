@@ -12,9 +12,10 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
-import { defaultClothingItems } from "../../utils/constants";
+import Api from "../../utils/api";
 
 function App() {
+  const clothesApi = new Api("http://localhost:3001");
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -22,7 +23,7 @@ function App() {
     condition: "",
     isDay: true,
   });
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
@@ -50,11 +51,26 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ nameInput, imageUrl, weatherType }) => {
-    setClothingItems([
-      { name: nameInput, link: imageUrl, weather: weatherType },
-      ...clothingItems,
-    ]);
+    // setClothingItems([
+    //   { name: nameInput, link: imageUrl, weather: weatherType },
+    //   ...clothingItems,
+    // ]);
+    clothesApi
+      .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
+      .then(() => {
+        fetchClothes();
+      })
+      .catch(console.error);
     closeActiveModal();
+  };
+
+  const fetchClothes = () => {
+    clothesApi
+      .getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
   };
 
   // wait for modal_opened class to be added before adding event listeners
@@ -82,6 +98,7 @@ function App() {
     }
   }, [activeModal]);
 
+  //api calls on start
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -89,6 +106,8 @@ function App() {
         setWeatherData(filteredData);
       })
       .catch(console.error);
+
+    fetchClothes();
   }, []);
 
   return (
@@ -121,6 +140,7 @@ function App() {
                 <Profile
                   handleCardClick={handleCardClick}
                   handleAddClick={handleAddClick}
+                  clothingItems={clothingItems}
                 />
               }
             />
