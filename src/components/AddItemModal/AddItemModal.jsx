@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
@@ -17,6 +16,13 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
     setNameInput("");
     setImageUrl("");
     setWeatherType("");
+  };
+
+  const setRadioStyle = (value) => {
+    if (weatherType && weatherType !== value) {
+      return { opacity: 0.5 };
+    }
+    return {};
   };
 
   return (
@@ -51,7 +57,11 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__label">
+        <label
+          htmlFor="hot"
+          className="modal__label"
+          style={setRadioStyle("hot")}
+        >
           <input
             type="radio"
             name="weather-type"
@@ -63,7 +73,11 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
           />
           Hot
         </label>
-        <label htmlFor="warm" className="modal__label">
+        <label
+          htmlFor="warm"
+          className="modal__label"
+          style={setRadioStyle("warm")}
+        >
           <input
             type="radio"
             name="weather-type"
@@ -75,7 +89,11 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
           />
           Warm
         </label>
-        <label htmlFor="cold" className="modal__label">
+        <label
+          htmlFor="cold"
+          className="modal__label"
+          style={setRadioStyle("cold")}
+        >
           <input
             type="radio"
             name="weather-type"

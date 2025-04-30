@@ -65,10 +65,6 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ nameInput, imageUrl, weatherType }) => {
-    // setClothingItems([
-    //   { name: nameInput, link: imageUrl, weather: weatherType },
-    //   ...clothingItems,
-    // ]);
     clothesApi
       .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
       .then(() => {
@@ -112,7 +108,7 @@ function App() {
     }
   }, [activeModal]);
 
-  //api calls on start
+  // api calls on start
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {

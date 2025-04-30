@@ -46,14 +46,9 @@ function Header({
         >
           + Add clothes
         </button>
-        <Link
-          to="/profile"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <div className="header__user-container">
-            <p className="header__username">Terrance Tegene</p>
-            <img src={avatar} alt="User's avatar" className="header__avatar" />
-          </div>
+        <Link to="/profile" className="header__user-container ">
+          <p className="header__username">Terrance Tegene</p>
+          <img src={avatar} alt="User's avatar" className="header__avatar" />
         </Link>
       </div>
     </header>
