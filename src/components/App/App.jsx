@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
@@ -44,6 +45,19 @@ function App() {
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
+  };
+
+  const handleConfirmationClick = () => {
+    setActiveModal("confirmation");
+  };
+
+  const handleCardDelete = () => {
+    clothesApi
+      .deleteItem(selectedCard._id)
+      .then(() => fetchClothes())
+      .catch(console.error);
+    fetchClothes();
+    closeActiveModal();
   };
 
   const closeActiveModal = () => {
@@ -157,6 +171,12 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          handleConfirmationClick={handleConfirmationClick}
+        />
+        <ConfirmationModal
+          activeModal={activeModal}
+          onClose={closeActiveModal}
+          onDelete={handleCardDelete}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

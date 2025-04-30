@@ -17,7 +17,7 @@ class Api {
 
   uploadItem({ name, weather, imageUrl }) {
     return fetch(`${this._baseUrl}/items`, {
-      method: "Post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -26,6 +26,15 @@ class Api {
         weather,
         imageUrl,
       }),
+    }).then(this._checkOk);
+  }
+
+  deleteItem(id) {
+    return fetch(`${this._baseUrl}/items/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(this._checkOk);
   }
 }

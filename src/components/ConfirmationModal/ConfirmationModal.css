@@ -1,0 +1,23 @@
+.modal__content_type_confirmation {
+  padding: 0;
+  max-width: 670px;
+  padding: 60px 0;
+}
+.modal__confirm-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.modal__confirm-text {
+  margin: 0;
+  margin-bottom: 40px;
+  padding: 0;
+  font-size: 20px;
+  text-align: center;
+}
+.modal__cancel-btn {
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
