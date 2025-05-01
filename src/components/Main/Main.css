@@ -16,7 +16,7 @@
 .cards__randomize-btn {
   display: none;
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 550px) {
   .cards {
     margin-bottom: 83px;
   }

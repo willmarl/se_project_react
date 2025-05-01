@@ -49,7 +49,7 @@
   display: none;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 550px) {
   .header {
     position: relative;
     padding: 0;
@@ -101,8 +101,6 @@
   }
   .header__user-container {
     position: relative;
-  }
-  .header__add-clothes-btn {
   }
 
   .header__mobile-nav-btn {

@@ -27,7 +27,13 @@
   object-fit: cover;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 1110px) {
+  .card__container {
+    width: 225px;
+    height: 225px;
+  }
+}
+@media screen and (max-width: 800px) {
   .card__container {
     width: 164px;
     height: 164px;

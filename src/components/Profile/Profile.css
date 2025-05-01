@@ -9,10 +9,20 @@
 .profile__clothes-section {
   width: 100%;
 }
-
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 1000px) {
+  .profile__sidebar {
+    flex: 1;
+  }
+  .profile__clothes-section {
+    flex: 2;
+  }
+}
+@media screen and (max-width: 550px) {
   .profile {
     flex-direction: column;
     margin: 20px 0 40px;
+  }
+  .profile__sidebar {
+    max-width: 500px;
   }
 }
