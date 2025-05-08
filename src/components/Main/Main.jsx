@@ -17,7 +17,8 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
           {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {clothingItems
+          {[...clothingItems]
+            .reverse()
             .filter((item) => {
               return item.weather === weatherData.type;
             })

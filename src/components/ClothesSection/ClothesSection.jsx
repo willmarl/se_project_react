@@ -11,7 +11,7 @@ function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
         </button>
       </div>
       <ul className="clothes-section__list">
-        {clothingItems.map((item) => {
+        {[...clothingItems].reverse().map((item) => {
           return (
             <ItemCard
               key={item._id}
