@@ -54,10 +54,11 @@ function App() {
   const handleCardDelete = () => {
     clothesApi
       .deleteItem(selectedCard._id)
-      .then(() => fetchClothes())
+      .then(() => {
+        fetchClothes();
+        closeActiveModal();
+      })
       .catch(console.error);
-    fetchClothes();
-    closeActiveModal();
   };
 
   const closeActiveModal = () => {
@@ -72,7 +73,6 @@ function App() {
         closeActiveModal();
       })
       .catch(console.error);
-    // closeActiveModal();
   };
 
   const fetchClothes = () => {
