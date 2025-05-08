@@ -13,10 +13,9 @@ import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
-import Api from "../../utils/api";
+import api from "../../utils/api";
 
 function App() {
-  const clothesApi = new Api("http://localhost:3001");
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -52,7 +51,7 @@ function App() {
   };
 
   const handleCardDelete = () => {
-    clothesApi
+    api
       .deleteItem(selectedCard._id)
       .then(() => {
         fetchClothes();
@@ -66,7 +65,7 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ nameInput, imageUrl, weatherType }) => {
-    return clothesApi
+    return api
       .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
       .then(() => {
         fetchClothes();
@@ -76,7 +75,7 @@ function App() {
   };
 
   const fetchClothes = () => {
-    clothesApi
+    api
       .getItems()
       .then((data) => {
         setClothingItems(data);

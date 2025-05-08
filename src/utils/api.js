@@ -1,42 +1,31 @@
-class Api {
-  constructor(baseUrl) {
-    this._baseUrl = baseUrl;
-  }
+const baseUrl = "http://localhost:3001";
 
-  _checkOk(res) {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
+const checkOk = (res) => {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(`Error: ${res.status}`);
   }
+};
 
-  getItems() {
-    return fetch(`${this._baseUrl}/items`).then((res) => this._checkOk(res));
-  }
+const getItems = () => {
+  return fetch(`${baseUrl}/items`).then((res) => checkOk(res));
+};
 
-  uploadItem({ name, weather, imageUrl }) {
-    return fetch(`${this._baseUrl}/items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        weather,
-        imageUrl,
-      }),
-    }).then(this._checkOk);
-  }
+const uploadItem = ({ name, weather, imageUrl }) => {
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, weather, imageUrl }),
+  }).then((res) => checkOk(res));
+};
 
-  deleteItem(id) {
-    return fetch(`${this._baseUrl}/items/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(this._checkOk);
-  }
-}
+const deleteItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+  }).then((res) => checkOk(res));
+};
 
-export default Api;
+export default { getItems, uploadItem, deleteItem };
