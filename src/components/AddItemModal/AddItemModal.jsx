@@ -31,10 +31,13 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItemModalSubmit({ nameInput, imageUrl, weatherType });
-    setNameInput("");
-    setImageUrl("");
-    setWeatherType("");
+    onAddItemModalSubmit({ nameInput, imageUrl, weatherType })
+      .then(() => {
+        setNameInput("");
+        setImageUrl("");
+        setWeatherType("");
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {

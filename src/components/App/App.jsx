@@ -65,13 +65,14 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ nameInput, imageUrl, weatherType }) => {
-    clothesApi
+    return clothesApi
       .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
       .then(() => {
         fetchClothes();
+        closeActiveModal();
       })
       .catch(console.error);
-    closeActiveModal();
+    // closeActiveModal();
   };
 
   const fetchClothes = () => {
