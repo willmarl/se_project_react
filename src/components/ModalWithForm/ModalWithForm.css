@@ -89,6 +89,20 @@
   margin-right: 5px;
   accent-color: black;
 }
+.modal__buttons {
+  gap: 12px;
+  display: flex;
+}
+.modal__extra-button {
+  color: #00000080;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
 .modal__submit {
   margin: 0;
   margin-top: auto;

@@ -8,6 +8,9 @@ function ModalWithForm({
   onClose,
   onSubmit,
   validity,
+  extraButton = false,
+  extraButtonText = "",
+  extrabuttonOnClick,
 }) {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -16,13 +19,23 @@ function ModalWithForm({
         <button onClick={onClose} type="button" className="modal__close" />
         <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button
-            type="submit"
-            className={`modal__submit ${validity ? "" : "modal__disable"}`}
-            disabled={!validity}
-          >
-            {buttonText}
-          </button>
+          <div className="modal__buttons">
+            <button
+              type="submit"
+              className={`modal__submit ${validity ? "" : "modal__disable"}`}
+              disabled={!validity}
+            >
+              {buttonText}
+            </button>
+            {extraButton && (
+              <button
+                className="modal__extra-button"
+                onClick={extrabuttonOnClick}
+              >
+                {extraButtonText}
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>

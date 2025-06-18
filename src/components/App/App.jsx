@@ -9,6 +9,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
@@ -28,6 +29,10 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const handleRegisterModal = () => {
+    setActiveModal("register");
+  };
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -126,6 +131,7 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
+          <button onClick={handleRegisterModal}>register</button>
           <Header
             isMobileMenuOpened={isMobileMenuOpened}
             toggleMobileMenu={toggleMobileMenu}
@@ -173,6 +179,11 @@ function App() {
           activeModal={activeModal}
           onClose={closeActiveModal}
           onDelete={handleCardDelete}
+        />
+        <RegisterModal
+          isOpen={activeModal}
+          onClose={closeActiveModal}
+          onAddItemModalSubmit={handleRegisterModal}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
