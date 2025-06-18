@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import "./App.css";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import * as auth from "../../utils/auth";
+
+import { coordinates, APIkey } from "../../utils/constants";
+import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
+import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
+import api from "../../utils/api";
+
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -12,12 +20,8 @@ import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 
-import { coordinates, APIkey } from "../../utils/constants";
-import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
-import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
-import api from "../../utils/api";
-
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -30,6 +34,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const navigate = useNavigate();
 
   const handleRegisterModal = () => {
     setActiveModal("register");
@@ -159,13 +165,16 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  handleCardClick={handleCardClick}
-                  handleAddClick={handleAddClick}
-                  clothingItems={clothingItems}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    handleCardClick={handleCardClick}
+                    handleAddClick={handleAddClick}
+                    clothingItems={clothingItems}
+                  />
+                </ProtectedRoute>
               }
             />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
 
           <Footer />
