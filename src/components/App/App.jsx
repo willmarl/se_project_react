@@ -10,6 +10,7 @@ import Profile from "../profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
@@ -32,6 +33,10 @@ function App() {
 
   const handleRegisterModal = () => {
     setActiveModal("register");
+  };
+
+  const handleLoginModal = () => {
+    setActiveModal("login");
   };
 
   const handleToggleSwitchChange = () => {
@@ -132,6 +137,7 @@ function App() {
       <div className="page">
         <div className="page__content">
           <button onClick={handleRegisterModal}>register</button>
+          <button onClick={handleLoginModal}>login</button>
           <Header
             isMobileMenuOpened={isMobileMenuOpened}
             toggleMobileMenu={toggleMobileMenu}
@@ -181,9 +187,14 @@ function App() {
           onDelete={handleCardDelete}
         />
         <RegisterModal
-          isOpen={activeModal}
+          isOpen={activeModal === "register"}
           onClose={closeActiveModal}
           onAddItemModalSubmit={handleRegisterModal}
+        />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onClose={closeActiveModal}
+          onAddItemModalSubmit={handleLoginModal}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
