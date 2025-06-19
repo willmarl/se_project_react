@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
+function RegisterModal({ onClose, isOpen, onRegisterSubmit }) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -30,9 +30,16 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegisterModalSubmit([data])
+    console.log(data);
+    onRegisterSubmit(data)
       .then(() => {
-        console.log("Successfully registered");
+        console.log("submited registered data");
+        setData({
+          email: "",
+          password: "",
+          name: "",
+          avatar: "",
+        });
       })
       .catch(console.error);
   };
@@ -95,7 +102,7 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
         htmlFor="name"
         className={`modal__label ${inputError.name ? "modal__error" : ""}`}
       >
-        Name {`${inputError.name}`}
+        Name* {`${inputError.name}`}
         <input
           type="text"
           id="name"
@@ -104,13 +111,14 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
           value={data.name}
           minLength={2}
           onChange={(e) => handleInputChange(e, "name")}
+          required={true}
         />
       </label>
       <label
         htmlFor="avatar"
         className={`modal__label ${inputError.avatar ? "modal__error" : ""}`}
       >
-        Avatar URL {`${inputError.avatar}`}
+        Avatar URL* {`${inputError.avatar}`}
         <input
           type="URL"
           id="avatar"
@@ -118,6 +126,7 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
           placeholder="Avatar URL"
           value={data.avatar}
           onChange={(e) => handleInputChange(e, "avatar")}
+          required={true}
         />
       </label>
     </ModalWithForm>

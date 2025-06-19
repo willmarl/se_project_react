@@ -37,11 +37,27 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleRegisterModal = () => {
+  const handleRegisterSubmit = ({
+    email,
+    password,
+    name = "",
+    avatar = "",
+  }) => {
+    return auth
+      .register(email, password, name, avatar)
+      .then(() => {
+        closeActiveModal();
+        // navigate("/profile");
+        console.log("sign user in here");
+        // make user login here
+      })
+      .catch(console.error);
+  };
+  const handleRegisterClick = () => {
     setActiveModal("register");
   };
 
-  const handleLoginModal = () => {
+  const handleLoginClick = () => {
     setActiveModal("login");
   };
 
@@ -142,8 +158,8 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
-          <button onClick={handleRegisterModal}>register</button>
-          <button onClick={handleLoginModal}>login</button>
+          <button onClick={handleRegisterClick}>register</button>
+          <button onClick={handleLoginClick}>login</button>
           <Header
             isMobileMenuOpened={isMobileMenuOpened}
             toggleMobileMenu={toggleMobileMenu}
@@ -198,12 +214,12 @@ function App() {
         <RegisterModal
           isOpen={activeModal === "register"}
           onClose={closeActiveModal}
-          onAddItemModalSubmit={handleRegisterModal}
+          onRegisterSubmit={handleRegisterSubmit}
         />
         <LoginModal
           isOpen={activeModal === "login"}
           onClose={closeActiveModal}
-          onAddItemModalSubmit={handleLoginModal}
+          onAddItemModalSubmit={handleLoginClick}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

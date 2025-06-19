@@ -1,11 +1,11 @@
-export const BASE_URL = "http://127.0.0.1";
+export const BASE_URL = "http://127.0.0.1:3001";
 
 const handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
 export const register = (email, password, name = "", avatar = "") => {
-  return fetch(`${BASE_URL}/auth/local/register`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -16,7 +16,7 @@ export const register = (email, password, name = "", avatar = "") => {
 };
 
 export const login = (email, password) => {
-  return fetch(`${BASE_URL}/auth/local`, {
+  return fetch(`${BASE_URL}/`, {
     method: "POST",
     headers: {
       Accept: "application/json",
