@@ -1,3 +1,5 @@
+import { getToken } from "./token";
+
 const baseUrl = "http://localhost:3001";
 
 const checkOk = (res) => {
@@ -16,6 +18,7 @@ const uploadItem = ({ name, weather, imageUrl }) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, weather, imageUrl }),
@@ -25,6 +28,9 @@ const uploadItem = ({ name, weather, imageUrl }) => {
 const deleteItem = (id) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
   }).then((res) => checkOk(res));
 };
 

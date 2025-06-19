@@ -19,10 +19,25 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
-import { setToken } from "../../utils/token";
+import { getToken, setToken } from "../../utils/token";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      return;
+    }
+    auth
+      .checkToken(token)
+      .then(() => {
+        setIsLoggedIn(true);
+        // set user data here
+        // maybe navigation here
+      })
+      .catch(console.error);
+  }, []);
+
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
