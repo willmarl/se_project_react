@@ -207,7 +207,7 @@ function App() {
             weatherData={weatherData}
           />
 
-          <CurrentUserContext.Provider value={currentUser}>
+          <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
             <Routes>
               <Route
                 path="/"
