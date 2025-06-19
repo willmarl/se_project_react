@@ -1,19 +1,60 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../Header/Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function Header({
   isMobileMenuOpened,
   toggleMobileMenu,
   handleAddClick,
   weatherData,
+  handleLoginClick,
+  handleRegisterClick,
 }) {
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  function RenderAuthButtons() {
+    if (isLoggedIn) {
+      return (
+        <div className="header__nav">
+          <button
+            type="button"
+            onClick={handleAddClick}
+            className="header__button"
+          >
+            + Add clothes
+          </button>
+          <Link to="/profile" className="header__user-container ">
+            <p className="header__username">{currentUser.name}</p>
+            <img
+              src={currentUser.avatar}
+              alt="User's avatar"
+              className="header__avatar"
+            />
+          </Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="header__nav">
+          <button onClick={handleRegisterClick} className="header__button">
+            Sign Up
+          </button>
+          <button onClick={handleLoginClick} className="header__button">
+            Log In
+          </button>
+        </div>
+      );
+    }
+  }
 
   return (
     <header className="header">
@@ -39,17 +80,7 @@ function Header({
           className="header__nav__close-btn"
         ></button>
         <ToggleSwitch />
-        <button
-          type="button"
-          onClick={handleAddClick}
-          className="header__add-clothes-btn"
-        >
-          + Add clothes
-        </button>
-        <Link to="/profile" className="header__user-container ">
-          <p className="header__username">Terrance Tegene</p>
-          <img src={avatar} alt="User's avatar" className="header__avatar" />
-        </Link>
+        <RenderAuthButtons />
       </div>
     </header>
   );

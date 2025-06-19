@@ -18,14 +18,14 @@
   align-items: center;
   margin-left: auto;
 }
-.header__add-clothes-btn {
+.header__button {
   font-weight: 700;
   border: none;
   background-color: transparent;
   cursor: pointer;
   transition: opacity 0.1s;
 }
-.header__add-clothes-btn:hover {
+.header__button:hover {
   opacity: 0.6;
 }
 .header__user-container {
