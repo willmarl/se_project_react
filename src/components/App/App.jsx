@@ -26,6 +26,13 @@ import { getToken, removeToken, setToken } from "../../utils/token";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: "", avatar: "" });
+  /* example data of user
+  {_id: '16ea5e72abc14d12',
+  name: 'test',
+  avatar: 'https://image.com/1.png',
+  email: 'test@test.com',
+  __v: 0}
+  */
   useEffect(() => {
     const token = getToken();
     if (!token) {

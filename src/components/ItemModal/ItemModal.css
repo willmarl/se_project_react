@@ -51,6 +51,9 @@
   color: #ff4d00;
   cursor: pointer;
 }
+.modal__delete-btn_hidden {
+  display: none;
+}
 .modal__weather {
   margin: 0;
   padding: 0;
