@@ -8,6 +8,8 @@ import * as auth from "../../utils/auth";
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../context/CurrentUserContext";
+
 import api from "../../utils/api";
 
 import Header from "../Header/Header";
@@ -23,6 +25,7 @@ import { getToken, setToken } from "../../utils/token";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ name: "", avatar: "" });
   useEffect(() => {
     const token = getToken();
     if (!token) {
@@ -30,9 +33,9 @@ function App() {
     }
     auth
       .checkToken(token)
-      .then(() => {
+      .then((userData) => {
         setIsLoggedIn(true);
-        // set user data here
+        setCurrentUser(userData);
         // maybe navigation here
       })
       .catch(console.error);
@@ -82,12 +85,16 @@ function App() {
       .then((data) => {
         if (data.token) {
           setToken(data.token);
-          // change user data here
-          setIsLoggedIn(true);
-          closeActiveModal();
-          navigate("/profile"); //temporary
+          return auth.checkToken(data.token);
         }
       })
+      .then((userData) => {
+        setCurrentUser({ name: userData.name, avatar: userData.avatar });
+        setIsLoggedIn(true);
+        closeActiveModal();
+        navigate("/profile");
+      })
+
       .catch(console.error);
   };
   const handleLoginClick = () => {
@@ -200,31 +207,33 @@ function App() {
             weatherData={weatherData}
           />
 
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  handleCardClick={handleCardClick}
-                  weatherData={weatherData}
-                  clothingItems={clothingItems}
-                />
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Profile
+          <CurrentUserContext.Provider value={currentUser}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
                     handleCardClick={handleCardClick}
-                    handleAddClick={handleAddClick}
+                    weatherData={weatherData}
                     clothingItems={clothingItems}
                   />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      handleCardClick={handleCardClick}
+                      handleAddClick={handleAddClick}
+                      clothingItems={clothingItems}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </CurrentUserContext.Provider>
 
           <Footer />
         </div>
