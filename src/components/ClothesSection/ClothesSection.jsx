@@ -1,7 +1,11 @@
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard.jsx";
+import { useContext } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
+  const { currentUser } = useContext(CurrentUserContext);
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__title">
@@ -12,13 +16,15 @@ function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
       </div>
       <ul className="clothes-section__list">
         {[...clothingItems].reverse().map((item) => {
-          return (
-            <ItemCard
-              key={item._id}
-              item={item}
-              onCardClick={handleCardClick}
-            />
-          );
+          if (item.owner === currentUser._id) {
+            return (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={handleCardClick}
+              />
+            );
+          }
         })}
       </ul>
     </div>
