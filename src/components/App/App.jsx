@@ -21,7 +21,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
-import { getToken, setToken } from "../../utils/token";
+import { getToken, removeToken, setToken } from "../../utils/token";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -99,6 +99,12 @@ function App() {
   };
   const handleLoginClick = () => {
     setActiveModal("login");
+  };
+  const handleLogoutClick = () => {
+    removeToken();
+    setIsLoggedIn(false);
+    setCurrentUser({ name: "", avatar: "" });
+    navigate("/");
   };
 
   const handleToggleSwitchChange = () => {
@@ -200,6 +206,7 @@ function App() {
         <div className="page__content">
           <button onClick={handleRegisterClick}>register</button>
           <button onClick={handleLoginClick}>login</button>
+          <button onClick={handleLogoutClick}>logout</button>
           <Header
             isMobileMenuOpened={isMobileMenuOpened}
             toggleMobileMenu={toggleMobileMenu}
