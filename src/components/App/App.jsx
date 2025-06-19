@@ -19,6 +19,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import { setToken } from "../../utils/token";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -57,6 +58,23 @@ function App() {
     setActiveModal("register");
   };
 
+  const handleLogin = ({ email, password }) => {
+    if (!email || !password) {
+      return;
+    }
+    auth
+      .login(email, password)
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          // change user data here
+          setIsLoggedIn(true);
+          closeActiveModal();
+          navigate("/profile"); //temporary
+        }
+      })
+      .catch(console.error);
+  };
   const handleLoginClick = () => {
     setActiveModal("login");
   };
@@ -219,7 +237,7 @@ function App() {
         <LoginModal
           isOpen={activeModal === "login"}
           onClose={closeActiveModal}
-          onAddItemModalSubmit={handleLoginClick}
+          handleLogin={handleLogin}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
