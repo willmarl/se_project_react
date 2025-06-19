@@ -41,6 +41,15 @@
 .header__avatar {
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+}
+.header__avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .header__mobile-nav-btn {
   display: none;

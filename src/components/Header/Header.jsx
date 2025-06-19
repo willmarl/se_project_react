@@ -5,6 +5,7 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import CurrentUserContext from "../../context/CurrentUserContext";
+import Avatar from "../Avatar/Avatar";
 
 function Header({
   isMobileMenuOpened,
@@ -32,13 +33,10 @@ function Header({
           >
             + Add clothes
           </button>
+
           <Link to="/profile" className="header__user-container ">
             <p className="header__username">{currentUser.name}</p>
-            <img
-              src={currentUser.avatar}
-              alt="User's avatar"
-              className="header__avatar"
-            />
+            <Avatar />
           </Link>
         </div>
       );
