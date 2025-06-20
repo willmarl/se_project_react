@@ -2,26 +2,50 @@
 
 ## Project Description
 
-WTWR (What to Wear) is an interactive web application that helps users decide what to wear based on their local weather conditions. The app fetches real-time weather data from the OpenWeather API and suggests appropriate clothing items from the user's wardrobe. Users can:
-
-- View weather-based clothing recommendations
-- Add items to their virtual wardrobe
-- Organize clothes by weather type
-- Toggle between Fahrenheit and Celsius
-- Manage their clothing collection through a profile interface
+WTWR (What to Wear) is a full-stack web application that helps users decide what to wear based on their local weather conditions. The app fetches real-time weather data from the OpenWeather API and suggests appropriate clothing items from the user's wardrobe. Users can create accounts, manage their personal clothing collections, and can like other users' items.
 
 ## Functionality
 
-- Real-time weather data integration
-- Dynamic clothing suggestions based on temperature
-- Responsive design for all devices
-- Temperature unit conversion
+- User Authentication & Authorization
+
+  - Register and login functionality
+  - Protected routes for authenticated users
+  - JWT token-based authentication
+
+- Weather Features
+
+  - Real-time weather data integration
+  - Dynamic clothing suggestions based on temperature
+  - Temperature unit conversion (Fahrenheit/Celsius)
+
+- Clothing Management
+
+  - Add and delete clothing items
+  - Upload image links for clothing items
+  - Like/unlike clothing items
+
+- User Management
+
+  - Update name and profile
+  - Placeholder avatar generated if image failed
+
+- Responsive Design
+  - Mobile-friendly interface
 
 ## Technologies and Techniques Used
 
-- **React** React, React Router, React Context
+### Frontend
+
+- **React** - React Router, React Context
 - **Build Tool:** Vite
 - **API Integration:** OpenWeather API
+
+### Backend
+
+- **Node.js & Express**
+- **MongoDB**
+- **Authentication** - JWT tokens
+- **Security** - Protected routes, input validation
 
 ### Screenshots
 
@@ -30,3 +54,4 @@ WTWR (What to Wear) is an interactive web application that helps users decide wh
 ## Additional Resources
 
 - [OpenWeather API Documentation](https://openweathermap.org/api/one-call-3#example)
+- [Backend Repository](https://github.com/willmarl/se_project_express)
