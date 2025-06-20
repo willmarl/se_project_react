@@ -24,7 +24,12 @@ function Main({ weatherData, handleCardClick, clothingItems, onCardLike }) {
             })
             .map((item) => {
               return (
-                <ItemCard key={item._id} item={item} onCardLike={onCardLike} />
+                <ItemCard
+                  key={item._id}
+                  item={item}
+                  onCardLike={onCardLike}
+                  onCardClick={handleCardClick}
+                />
               );
             })}
         </ul>

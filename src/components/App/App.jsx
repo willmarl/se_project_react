@@ -97,7 +97,7 @@ function App() {
         }
       })
       .then((userData) => {
-        setCurrentUser({ name: userData.name, avatar: userData.avatar });
+        setCurrentUser(userData);
         setIsLoggedIn(true);
         closeActiveModal();
         navigate("/profile");
