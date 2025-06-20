@@ -26,7 +26,6 @@ function LoginModal({ onClose, isOpen, handleLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login button pressed");
     handleLogin(data);
   };
 

@@ -46,7 +46,6 @@ const updateProfile = ({ name, avatar }) => {
 };
 
 const addCardLike = (id) => {
-  console.log(id);
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {

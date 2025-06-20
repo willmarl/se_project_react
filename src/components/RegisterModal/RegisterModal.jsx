@@ -30,10 +30,8 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     onRegisterSubmit(data)
       .then(() => {
-        console.log("submited registered data");
         setData({
           email: "",
           password: "",

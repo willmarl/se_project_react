@@ -27,13 +27,7 @@ import { getToken, removeToken, setToken } from "../../utils/token";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: "", avatar: "" });
-  /* example data of user
-  {_id: '16ea5e72abc14d12',
-  name: 'test',
-  avatar: 'https://image.com/1.png',
-  email: 'test@test.com',
-  __v: 0}
-  */
+
   useEffect(() => {
     const token = getToken();
     if (!token) {
@@ -44,7 +38,6 @@ function App() {
       .then((userData) => {
         setIsLoggedIn(true);
         setCurrentUser(userData);
-        // maybe navigation here
       })
       .catch(console.error);
   }, []);
@@ -74,9 +67,6 @@ function App() {
       .register(email, password, name, avatar)
       .then(() => {
         closeActiveModal();
-        // navigate("/profile");
-        console.log("sign user in here");
-        // make user login here
       })
       .catch(console.error);
   };
@@ -140,7 +130,6 @@ function App() {
   const handleCardLike = ({ _id, likes }) => {
     const isLiked = likes.some((id) => currentUser._id === id);
     if (!isLiked) {
-      console.log("liking");
       api
         .addCardLike(_id)
         .then((updatedCard) => {
@@ -150,7 +139,6 @@ function App() {
         })
         .catch(console.error);
     } else {
-      console.log("deleting");
       api
         .removeCardLike(_id)
         .then((updatedCard) => {
@@ -160,7 +148,6 @@ function App() {
         })
         .catch(console.error);
     }
-    console.log(`likes ${likes} | currentUserId ${currentUser._id}`);
   };
 
   const handleCardClick = (card) => {
@@ -255,9 +242,6 @@ function App() {
       >
         <div className="page">
           <div className="page__content">
-            <button onClick={handleRegisterClick}>register</button>
-            <button onClick={handleLoginClick}>login</button>
-            <button onClick={handleLogoutClick}>logout</button>
             <Header
               isMobileMenuOpened={isMobileMenuOpened}
               toggleMobileMenu={toggleMobileMenu}
