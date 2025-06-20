@@ -36,7 +36,10 @@ function Header({
 
           <Link to="/profile" className="header__user-container ">
             <p className="header__username">{currentUser.name}</p>
-            <Avatar />
+            <Avatar
+              styleName={"header__avatar"}
+              styleNameAlt={"header__avatar-placeholder"}
+            />
           </Link>
         </div>
       );

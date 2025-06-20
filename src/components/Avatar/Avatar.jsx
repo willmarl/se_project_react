@@ -2,7 +2,7 @@ import "../Header/Header.css";
 import { useState, useContext } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
-function Avatar() {
+function Avatar({ styleName, styleNameAlt }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [validImage, setValidImage] = useState(true);
 
@@ -18,16 +18,12 @@ function Avatar() {
         <img
           src={currentUser.avatar}
           alt="User's avatar"
-          className="header__avatar"
+          className={styleName}
           onError={handleImageError}
         />
       );
     } else {
-      return (
-        <div className="header__avatar header__avatar-placeholder">
-          {initials}
-        </div>
-      );
+      return <div className={styleName + " " + styleNameAlt}>{initials}</div>;
     }
   }
 
