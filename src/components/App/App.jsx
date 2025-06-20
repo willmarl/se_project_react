@@ -21,6 +21,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { getToken, removeToken, setToken } from "../../utils/token";
 
 function App() {
@@ -113,6 +114,19 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser({ name: "", avatar: "" });
     navigate("/");
+  };
+
+  const handleEditProfileSubmit = (data) => {
+    return api
+      .updateProfile(data)
+      .then(() => {
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
   };
 
   const handleToggleSwitchChange = () => {
@@ -210,7 +224,9 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
+      <CurrentUserContext.Provider
+        value={{ currentUser, isLoggedIn, setCurrentUser }}
+      >
         <div className="page">
           <div className="page__content">
             <button onClick={handleRegisterClick}>register</button>
@@ -245,6 +261,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       clothingItems={clothingItems}
                       handleLogoutClick={handleLogoutClick}
+                      handleEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
@@ -279,6 +296,11 @@ function App() {
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             handleLogin={handleLogin}
+          />
+          <EditProfileModal
+            isOpen={activeModal === "edit-profile"}
+            onClose={closeActiveModal}
+            onEditProfileSubmit={handleEditProfileSubmit}
           />
         </div>
       </CurrentUserContext.Provider>

@@ -34,4 +34,15 @@ const deleteItem = (id) => {
   }).then((res) => checkOk(res));
 };
 
-export default { getItems, uploadItem, deleteItem };
+const updateProfile = ({ name, avatar }) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then((res) => checkOk(res));
+};
+
+export default { getItems, uploadItem, deleteItem, updateProfile };
