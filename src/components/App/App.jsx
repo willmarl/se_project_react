@@ -57,6 +57,19 @@ function App() {
 
   const navigate = useNavigate();
 
+  const handleRegisterClick = () => {
+    setActiveModal("register");
+  };
+
+  const handleTokenLogin = (token) => {
+    setToken(token);
+    return auth.checkToken(token).then((userData) => {
+      setCurrentUser(userData);
+      setIsLoggedIn(true);
+      closeActiveModal();
+    });
+  };
+
   const handleRegisterSubmit = ({
     email,
     password,
@@ -65,13 +78,13 @@ function App() {
   }) => {
     return auth
       .register(email, password, name, avatar)
-      .then(() => {
-        closeActiveModal();
+      .then(() => auth.login(email, password))
+      .then((data) => {
+        if (data.token) {
+          return handleTokenLogin(data.token);
+        }
       })
       .catch(console.error);
-  };
-  const handleRegisterClick = () => {
-    setActiveModal("register");
   };
 
   const handleLogin = ({ email, password }) => {
@@ -82,19 +95,12 @@ function App() {
       .login(email, password)
       .then((data) => {
         if (data.token) {
-          setToken(data.token);
-          return auth.checkToken(data.token);
+          return handleTokenLogin(data.token);
         }
       })
-      .then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-        closeActiveModal();
-        navigate("/profile");
-      })
-
       .catch(console.error);
   };
+
   const handleLoginClick = () => {
     setActiveModal("login");
   };
