@@ -46,7 +46,7 @@ function LoginModal({ onClose, isOpen, handleLogin }) {
           password: "",
         });
       } else {
-        console.log(err);
+        console.error(err);
       }
     });
   };
