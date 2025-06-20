@@ -5,7 +5,7 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 import arrow from "../../assets/circle-arrow.svg";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext.jsx";
 
-function Main({ weatherData, handleCardClick, clothingItems }) {
+function Main({ weatherData, handleCardClick, clothingItems, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (
@@ -24,11 +24,7 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
             })
             .map((item) => {
               return (
-                <ItemCard
-                  key={item._id}
-                  item={item}
-                  onCardClick={handleCardClick}
-                />
+                <ItemCard key={item._id} item={item} onCardLike={onCardLike} />
               );
             })}
         </ul>

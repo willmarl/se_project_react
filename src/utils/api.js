@@ -45,4 +45,32 @@ const updateProfile = ({ name, avatar }) => {
   }).then((res) => checkOk(res));
 };
 
-export default { getItems, uploadItem, deleteItem, updateProfile };
+const addCardLike = (id) => {
+  console.log(id);
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => checkOk(res));
+};
+
+const removeCardLike = (id) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => checkOk(res));
+};
+
+export default {
+  getItems,
+  uploadItem,
+  deleteItem,
+  updateProfile,
+  addCardLike,
+  removeCardLike,
+};

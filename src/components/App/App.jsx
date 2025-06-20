@@ -137,6 +137,32 @@ function App() {
     setIsMobileMenuOpened(!isMobileMenuOpened);
   };
 
+  const handleCardLike = ({ _id, likes }) => {
+    const isLiked = likes.some((id) => currentUser._id === id);
+    if (!isLiked) {
+      console.log("liking");
+      api
+        .addCardLike(_id)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === _id ? updatedCard : item))
+          );
+        })
+        .catch(console.error);
+    } else {
+      console.log("deleting");
+      api
+        .removeCardLike(_id)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === _id ? updatedCard : item))
+          );
+        })
+        .catch(console.error);
+    }
+    console.log(`likes ${likes} | currentUserId ${currentUser._id}`);
+  };
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -249,6 +275,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     weatherData={weatherData}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
