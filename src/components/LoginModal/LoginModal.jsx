@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function LoginModal({ onClose, isOpen, handleLogin }) {
+  const { isLoggedIn } = useContext(CurrentUserContext);
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,7 +17,9 @@ function LoginModal({ onClose, isOpen, handleLogin }) {
 
   useEffect(() => {
     if (
-      Object.values(inputError).every((i) => i === "") &&
+      Object.values(inputError).every(
+        (i) => i === "" || i === "(Incorrect email or password)"
+      ) &&
       data.email &&
       data.password
     ) {
@@ -24,9 +29,26 @@ function LoginModal({ onClose, isOpen, handleLogin }) {
     }
   }, [inputError]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      setData({ email: "", password: "" });
+      setInputError({ email: "", password: "" });
+    }
+  }, [isLoggedIn]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(data);
+    handleLogin(data).catch((err) => {
+      if (err.includes("401")) {
+        setInputError({
+          ...inputError,
+          email: "(Incorrect email or password)",
+          password: "",
+        });
+      } else {
+        console.log(err);
+      }
+    });
   };
 
   const handleInputChange = (e, inputId) => {

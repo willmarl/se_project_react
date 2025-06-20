@@ -63,11 +63,14 @@ function App() {
 
   const handleTokenLogin = (token) => {
     setToken(token);
-    return auth.checkToken(token).then((userData) => {
-      setCurrentUser(userData);
-      setIsLoggedIn(true);
-      closeActiveModal();
-    });
+    return auth
+      .checkToken(token)
+      .then((userData) => {
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const handleRegisterSubmit = ({
@@ -91,14 +94,17 @@ function App() {
     if (!email || !password) {
       return;
     }
-    auth
+    return auth
       .login(email, password)
       .then((data) => {
         if (data.token) {
           return handleTokenLogin(data.token);
         }
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        throw err;
+      });
   };
 
   const handleLoginClick = () => {
