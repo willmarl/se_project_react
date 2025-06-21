@@ -121,7 +121,8 @@ function App() {
   const handleEditProfileSubmit = (data) => {
     return api
       .updateProfile(data)
-      .then(() => {
+      .then((res) => {
+        setCurrentUser(res.data);
         closeActiveModal();
       })
       .catch(console.error);
