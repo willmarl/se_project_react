@@ -2,7 +2,7 @@ import { getToken } from "./token";
 
 const baseUrl = "http://localhost:3001";
 
-const checkOk = (res) => {
+export const checkOk = (res) => {
   if (res.ok) {
     return res.json();
   } else {
@@ -72,4 +72,5 @@ export default {
   updateProfile,
   addCardLike,
   removeCardLike,
+  checkOk,
 };

@@ -1,8 +1,6 @@
-export const BASE_URL = "http://127.0.0.1:3001";
+import { checkOk } from "./api";
 
-const handleServerResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-};
+export const BASE_URL = "http://127.0.0.1:3001";
 
 export const register = (email, password, name = "", avatar = "") => {
   return fetch(`${BASE_URL}/signup`, {
@@ -12,7 +10,7 @@ export const register = (email, password, name = "", avatar = "") => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password, name, avatar }),
-  }).then(handleServerResponse);
+  }).then(checkOk);
 };
 
 export const login = (email, password) => {
@@ -23,7 +21,7 @@ export const login = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(handleServerResponse);
+  }).then(checkOk);
 };
 
 export const checkToken = (token) => {
@@ -33,5 +31,5 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(handleServerResponse);
+  }).then(checkOk);
 };
