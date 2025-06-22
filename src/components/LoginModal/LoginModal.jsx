@@ -1,66 +1,32 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../context/CurrentUserContext";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function LoginModal({ onClose, isOpen, handleLogin }) {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
-  const [inputError, setInputError] = useState({
-    email: "",
-    password: "",
-  });
-  const [validity, setValidity] = useState(false);
+  const { values, handleChange, errors, isValid, resetForm, setErrors } =
+    useFormAndValidation();
 
   useEffect(() => {
-    if (
-      Object.values(inputError).every(
-        (i) => i === "" || i === "(Incorrect email or password)"
-      ) &&
-      data.email &&
-      data.password
-    ) {
-      setValidity(true);
-    } else {
-      setValidity(false);
+    if (isOpen && !isLoggedIn) {
+      resetForm();
     }
-  }, [inputError]);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      setData({ email: "", password: "" });
-      setInputError({ email: "", password: "" });
-    }
-  }, [isLoggedIn]);
+  }, [isOpen, isLoggedIn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(data).catch((err) => {
+    handleLogin(values).catch((err) => {
       if (err.includes("401")) {
-        setInputError({
-          ...inputError,
+        setErrors((prev) => ({
+          ...prev,
           email: "(Incorrect email or password)",
-          password: "",
-        });
+        }));
       } else {
         console.error(err);
       }
     });
-  };
-
-  const handleInputChange = (e, inputId) => {
-    if (e.target.validity.valid) {
-      setInputError({ ...inputError, [inputId]: "" });
-    } else {
-      setInputError({
-        ...inputError,
-        [inputId]: `(${e.target.validationMessage})`,
-      });
-    }
-    setData({ ...data, [inputId]: e.target.value });
   };
 
   return (
@@ -70,39 +36,39 @@ function LoginModal({ onClose, isOpen, handleLogin }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      validity={validity}
+      validity={isValid}
       extraButton={true}
       extraButtonText="or Register"
     >
       <label
         htmlFor="email"
-        className={`modal__label ${inputError.email ? "modal__error" : ""}`}
+        className={`modal__label ${errors.email ? "modal__error" : ""}`}
       >
-        Email* {`${inputError.email}`}
+        Email* {errors.email && `${errors.email}`}
         <input
           type="email"
           id="email"
-          className={`modal__input ${inputError.email ? "modal__error" : ""}`}
+          name="email"
+          className={`modal__input ${errors.email ? "modal__error" : ""}`}
           placeholder="Email"
-          value={data.email}
-          onChange={(e) => handleInputChange(e, "email")}
+          value={values.email || ""}
+          onChange={handleChange}
           required={true}
         />
       </label>
       <label
         htmlFor="password"
-        className={`modal__label ${inputError.password ? "modal__error" : ""}`}
+        className={`modal__label ${errors.password ? "modal__error" : ""}`}
       >
-        Password* {`${inputError.password}`}
+        Password* {errors.password && `${errors.password}`}
         <input
           type="password"
           id="password"
-          className={`modal__input ${
-            inputError.password ? "modal__error" : ""
-          }`}
+          name="password"
+          className={`modal__input ${errors.password ? "modal__error" : ""}`}
           placeholder="Password"
-          value={data.password}
-          onChange={(e) => handleInputChange(e, "password")}
+          value={values.password || ""}
+          onChange={handleChange}
           required={true}
         />
       </label>

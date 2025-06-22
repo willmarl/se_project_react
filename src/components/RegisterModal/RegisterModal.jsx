@@ -1,57 +1,27 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function RegisterModal({ onClose, isOpen, onRegisterSubmit }) {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
-  });
-  const [inputError, setInputError] = useState({
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
-  });
-  const [validity, setValidity] = useState(false);
+  const { isLoggedIn } = useContext(CurrentUserContext);
+
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
 
   useEffect(() => {
-    if (
-      Object.values(inputError).every((i) => i === "") &&
-      data.email &&
-      data.password
-    ) {
-      setValidity(true);
-    } else {
-      setValidity(false);
+    if (isOpen && !isLoggedIn) {
+      resetForm();
     }
-  }, [inputError]);
+  }, [isOpen, isLoggedIn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegisterSubmit(data)
+    onRegisterSubmit(values)
       .then(() => {
-        setData({
-          email: "",
-          password: "",
-          name: "",
-          avatar: "",
-        });
+        resetForm();
       })
       .catch(console.error);
-  };
-
-  const handleInputChange = (e, inputId) => {
-    if (e.target.validity.valid) {
-      setInputError({ ...inputError, [inputId]: "" });
-    } else {
-      setInputError({
-        ...inputError,
-        [inputId]: `(${e.target.validationMessage})`,
-      });
-    }
-    setData({ ...data, [inputId]: e.target.value });
   };
 
   return (
@@ -61,69 +31,72 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      validity={validity}
+      validity={isValid}
     >
       <label
         htmlFor="email"
-        className={`modal__label ${inputError.email ? "modal__error" : ""}`}
+        className={`modal__label ${errors.email ? "modal__error" : ""}`}
       >
-        Email* {`${inputError.email}`}
+        Email* {errors.email && `${errors.email}`}
         <input
           type="email"
           id="email"
-          className={`modal__input ${inputError.email ? "modal__error" : ""}`}
+          name="email"
+          className={`modal__input ${errors.email ? "modal__error" : ""}`}
           placeholder="Email"
-          value={data.email}
-          onChange={(e) => handleInputChange(e, "email")}
+          value={values.email || ""}
+          onChange={handleChange}
           required={true}
         />
       </label>
       <label
         htmlFor="password"
-        className={`modal__label ${inputError.password ? "modal__error" : ""}`}
+        className={`modal__label ${errors.password ? "modal__error" : ""}`}
       >
-        Password* {`${inputError.password}`}
+        Password* {errors.password && `${errors.password}`}
         <input
           type="password"
           id="password"
-          className={`modal__input ${
-            inputError.password ? "modal__error" : ""
-          }`}
+          name="password"
+          className={`modal__input ${errors.password ? "modal__error" : ""}`}
           placeholder="Password"
-          value={data.password}
+          value={values.password || ""}
           minLength={2}
-          onChange={(e) => handleInputChange(e, "password")}
+          onChange={handleChange}
           required={true}
         />
       </label>
       <label
         htmlFor="name"
-        className={`modal__label ${inputError.name ? "modal__error" : ""}`}
+        className={`modal__label ${errors.name ? "modal__error" : ""}`}
       >
-        Name* {`${inputError.name}`}
+        Name* {errors.name && `${errors.name}`}
         <input
           type="text"
           id="name"
-          className={`modal__input ${inputError.name ? "modal__error" : ""}`}
+          name="name"
+          className={`modal__input ${errors.name ? "modal__error" : ""}`}
           placeholder="Name"
-          value={data.name}
+          value={values.name || ""}
           minLength={2}
-          onChange={(e) => handleInputChange(e, "name")}
+          maxLength={30}
+          onChange={handleChange}
           required={true}
         />
       </label>
       <label
         htmlFor="avatar"
-        className={`modal__label ${inputError.avatar ? "modal__error" : ""}`}
+        className={`modal__label ${errors.avatar ? "modal__error" : ""}`}
       >
-        Avatar URL* {`${inputError.avatar}`}
+        Avatar URL* {errors.avatar && `${errors.avatar}`}
         <input
           type="URL"
           id="avatar"
-          className={`modal__input ${inputError.avatar ? "modal__error" : ""}`}
+          name="avatar"
+          className={`modal__input ${errors.avatar ? "modal__error" : ""}`}
           placeholder="Avatar URL"
-          value={data.avatar}
-          onChange={(e) => handleInputChange(e, "avatar")}
+          value={values.avatar || ""}
+          onChange={handleChange}
           required={true}
         />
       </label>
