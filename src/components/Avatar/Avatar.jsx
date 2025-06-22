@@ -1,5 +1,5 @@
 import "../Header/Header.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
 function Avatar({ styleName, styleNameAlt }) {
@@ -7,6 +7,10 @@ function Avatar({ styleName, styleNameAlt }) {
   const [validImage, setValidImage] = useState(true);
 
   const initials = currentUser.name[0];
+
+  useEffect(() => {
+    setValidImage(true);
+  }, [currentUser.avatar]);
 
   const handleImageError = () => {
     setValidImage(false);

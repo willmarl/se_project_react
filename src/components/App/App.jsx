@@ -138,10 +138,15 @@ function App() {
 
   const handleEditProfileSubmit = (data) => {
     const makeRequest = () =>
-      api.updateProfile(data).then((res) => {
-        setCurrentUser(res.data);
-      });
-    handleSubmit(makeRequest);
+      api
+        .updateProfile(data)
+        .then((res) => {
+          setCurrentUser(res.data);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    return handleSubmit(makeRequest);
   };
 
   const handleEditProfileClick = () => {

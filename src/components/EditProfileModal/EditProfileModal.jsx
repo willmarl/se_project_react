@@ -4,9 +4,9 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
-  const { values, handleChange, errors, isValid, setErrors } =
+  const { values, handleChange, errors, isValid, setErrors, setCustomError } =
     useFormAndValidation();
 
   useEffect(() => {
@@ -17,7 +17,11 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onEditProfileSubmit(values);
+    onEditProfileSubmit(values).catch((err) => {
+      if (err.includes("400")) {
+        setCustomError("avatar", "Invalid input field");
+      }
+    });
   };
 
   return (
