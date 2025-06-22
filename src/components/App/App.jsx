@@ -216,9 +216,12 @@ function App() {
         .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
         .then(() => {
           fetchClothes();
+        })
+        .catch((err) => {
+          return Promise.reject(err);
         });
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const fetchClothes = () => {
