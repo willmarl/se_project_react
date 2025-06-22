@@ -46,10 +46,7 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
         (isValid && weatherType !== "")
       }
     >
-      <label
-        htmlFor="name"
-        className={`modal__label ${errors.name ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.name ? "modal__error" : ""}`}>
         Name {errors.name && `(${errors.name})`}
         <input
           type="text"
@@ -66,7 +63,6 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
       </label>
 
       <label
-        htmlFor="imageUrl"
         className={`modal__label ${errors.imageUrl ? "modal__error" : ""}`}
       >
         Image {errors.imageUrl && `(${errors.imageUrl})`}
@@ -85,11 +81,7 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
 
-        <label
-          htmlFor="hot"
-          className="modal__label"
-          style={setRadioStyle("hot")}
-        >
+        <label className="modal__label" style={setRadioStyle("hot")}>
           <input
             type="radio"
             name="weather"
@@ -103,11 +95,7 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
           Hot
         </label>
 
-        <label
-          htmlFor="warm"
-          className="modal__label"
-          style={setRadioStyle("warm")}
-        >
+        <label className="modal__label" style={setRadioStyle("warm")}>
           <input
             type="radio"
             name="weather"
@@ -120,11 +108,7 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
           Warm
         </label>
 
-        <label
-          htmlFor="cold"
-          className="modal__label"
-          style={setRadioStyle("cold")}
-        >
+        <label className="modal__label" style={setRadioStyle("cold")}>
           <input
             type="radio"
             name="weather"

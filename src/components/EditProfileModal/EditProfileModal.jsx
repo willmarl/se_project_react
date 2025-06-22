@@ -18,7 +18,6 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onEditProfileSubmit(values);
-    setCurrentUser({ name: values.name, avatar: values.avatar });
   };
 
   return (
@@ -30,10 +29,7 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
       onSubmit={handleSubmit}
       validity={isValid || isLoading}
     >
-      <label
-        htmlFor="name"
-        className={`modal__label ${errors.name ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.name ? "modal__error" : ""}`}>
         Name* {errors.name && `${errors.name}`}
         <input
           type="text"
@@ -47,10 +43,7 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
           minLength={2}
         />
       </label>
-      <label
-        htmlFor="avatar"
-        className={`modal__label ${errors.avatar ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.avatar ? "modal__error" : ""}`}>
         Avatar {errors.avatar && `${errors.avatar}`}
         <input
           type="url"

@@ -40,10 +40,7 @@ function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
       extraButton={true}
       extraButtonText="or Register"
     >
-      <label
-        htmlFor="email"
-        className={`modal__label ${errors.email ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.email ? "modal__error" : ""}`}>
         Email* {errors.email && `${errors.email}`}
         <input
           type="email"
@@ -57,7 +54,6 @@ function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
         />
       </label>
       <label
-        htmlFor="password"
         className={`modal__label ${errors.password ? "modal__error" : ""}`}
       >
         Password* {errors.password && `${errors.password}`}

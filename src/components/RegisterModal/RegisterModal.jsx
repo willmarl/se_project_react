@@ -33,10 +33,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
       onSubmit={handleSubmit}
       validity={isValid || isLoading}
     >
-      <label
-        htmlFor="email"
-        className={`modal__label ${errors.email ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.email ? "modal__error" : ""}`}>
         Email* {errors.email && `${errors.email}`}
         <input
           type="email"
@@ -50,7 +47,6 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
         />
       </label>
       <label
-        htmlFor="password"
         className={`modal__label ${errors.password ? "modal__error" : ""}`}
       >
         Password* {errors.password && `${errors.password}`}
@@ -66,10 +62,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
           required={true}
         />
       </label>
-      <label
-        htmlFor="name"
-        className={`modal__label ${errors.name ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.name ? "modal__error" : ""}`}>
         Name* {errors.name && `${errors.name}`}
         <input
           type="text"
@@ -84,10 +77,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
           required={true}
         />
       </label>
-      <label
-        htmlFor="avatar"
-        className={`modal__label ${errors.avatar ? "modal__error" : ""}`}
-      >
+      <label className={`modal__label ${errors.avatar ? "modal__error" : ""}`}>
         Avatar URL* {errors.avatar && `${errors.avatar}`}
         <input
           type="URL"
