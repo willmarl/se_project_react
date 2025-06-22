@@ -37,7 +37,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
         Email* {errors.email && `${errors.email}`}
         <input
           type="email"
-          id="email"
+          id="registerEmail"
           name="email"
           className={`modal__input ${errors.email ? "modal__error" : ""}`}
           placeholder="Email"
@@ -52,7 +52,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
         Password* {errors.password && `${errors.password}`}
         <input
           type="password"
-          id="password"
+          id="registerPassword"
           name="password"
           className={`modal__input ${errors.password ? "modal__error" : ""}`}
           placeholder="Password"
@@ -66,7 +66,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
         Name* {errors.name && `${errors.name}`}
         <input
           type="text"
-          id="name"
+          id="registerName"
           name="name"
           className={`modal__input ${errors.name ? "modal__error" : ""}`}
           placeholder="Name"
@@ -81,7 +81,7 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
         Avatar URL* {errors.avatar && `${errors.avatar}`}
         <input
           type="URL"
-          id="avatar"
+          id="registerAvatar"
           name="avatar"
           className={`modal__input ${errors.avatar ? "modal__error" : ""}`}
           placeholder="Avatar URL"

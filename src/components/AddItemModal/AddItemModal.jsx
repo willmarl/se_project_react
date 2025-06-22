@@ -50,14 +50,14 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
         Name {errors.name && `(${errors.name})`}
         <input
           type="text"
-          id="name"
+          id="addItemName"
           name="name"
           className={`modal__input ${errors.name ? "modal__error" : ""}`}
           placeholder="Name"
           value={values.name || ""}
           onChange={handleChange}
           minLength={2}
-          maxLength={40}
+          maxLength={30}
           required
         />
       </label>
@@ -68,7 +68,7 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
         Image {errors.imageUrl && `(${errors.imageUrl})`}
         <input
           type="url"
-          id="imageUrl"
+          id="addItemImageUrl"
           name="imageUrl"
           className={`modal__input ${errors.imageUrl ? "modal__error" : ""}`}
           placeholder="Image URL"

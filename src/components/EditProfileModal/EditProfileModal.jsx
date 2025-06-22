@@ -33,7 +33,7 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
         Name* {errors.name && `${errors.name}`}
         <input
           type="text"
-          id="name"
+          id="editProfileName"
           name="name"
           className={`modal__input ${errors.name ? "modal__error" : ""}`}
           placeholder="name"
@@ -47,7 +47,7 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
         Avatar {errors.avatar && `${errors.avatar}`}
         <input
           type="url"
-          id="avatar"
+          id="editProfileAvatar"
           name="avatar"
           className={`modal__input ${errors.avatar ? "modal__error" : ""}`}
           placeholder="avatar"

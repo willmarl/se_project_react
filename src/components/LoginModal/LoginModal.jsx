@@ -44,7 +44,7 @@ function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
         Email* {errors.email && `${errors.email}`}
         <input
           type="email"
-          id="email"
+          id="loginEmail"
           name="email"
           className={`modal__input ${errors.email ? "modal__error" : ""}`}
           placeholder="Email"
@@ -59,7 +59,7 @@ function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
         Password* {errors.password && `${errors.password}`}
         <input
           type="password"
-          id="password"
+          id="loginPassword"
           name="password"
           className={`modal__input ${errors.password ? "modal__error" : ""}`}
           placeholder="Password"
