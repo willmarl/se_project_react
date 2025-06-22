@@ -60,9 +60,12 @@ function App() {
 
   const handleSubmit = (request) => {
     setIsLoading(true);
-    request()
+    return request()
       .then(() => closeActiveModal())
-      .catch(console.error)
+      .catch((err) => {
+        console.error(err);
+        return Promise.reject(err);
+      })
       .finally(() => setIsLoading(false));
   };
 
@@ -96,22 +99,30 @@ function App() {
           if (data.token) {
             return handleTokenLogin(data.token);
           }
+        })
+        .catch((err) => {
+          return Promise.reject(err);
         });
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const handleLogin = ({ email, password }) => {
     if (!email || !password) return;
 
     const makeRequest = () =>
-      auth.login(email, password).then((data) => {
-        if (data.token) {
-          return handleTokenLogin(data.token);
-        }
-      });
+      auth
+        .login(email, password)
+        .then((data) => {
+          if (data.token) {
+            return handleTokenLogin(data.token);
+          }
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const handleLoginClick = () => {

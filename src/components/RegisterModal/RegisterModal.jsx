@@ -12,8 +12,15 @@ function RegisterModal({
 }) {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation();
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+    setErrors,
+    setCustomError,
+  } = useFormAndValidation();
 
   useEffect(() => {
     if (isOpen && !isLoggedIn) {
@@ -27,7 +34,16 @@ function RegisterModal({
       .then(() => {
         resetForm();
       })
-      .catch(console.error);
+      .catch((err) => {
+        if (err.includes("400")) {
+          setCustomError("email", "Invalid input fields");
+        } else if (err.includes("409")) {
+          setCustomError("email", "Email already in use");
+        } else {
+          console.error(err);
+          setCustomError("email", err);
+        }
+      });
   };
 
   return (

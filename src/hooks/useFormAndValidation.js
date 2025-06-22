@@ -30,6 +30,13 @@ export function useFormAndValidation() {
     [setValues, setErrors, setIsValid]
   );
 
+  const setCustomError = (key, errorName) => {
+    setErrors((prev) => ({
+      ...prev,
+      [key]: `(${errorName})`,
+    }));
+  };
+
   return {
     values,
     handleChange,
@@ -39,5 +46,6 @@ export function useFormAndValidation() {
     setValues,
     setIsValid,
     setErrors,
+    setCustomError,
   };
 }

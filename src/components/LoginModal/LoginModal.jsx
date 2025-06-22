@@ -12,7 +12,7 @@ function LoginModal({
 }) {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
-  const { values, handleChange, errors, isValid, resetForm, setErrors } =
+  const { values, handleChange, errors, isValid, resetForm, setCustomError } =
     useFormAndValidation();
 
   useEffect(() => {
@@ -25,12 +25,10 @@ function LoginModal({
     e.preventDefault();
     handleLogin(values).catch((err) => {
       if (err.includes("401")) {
-        setErrors((prev) => ({
-          ...prev,
-          email: "(Incorrect email or password)",
-        }));
+        setCustomError("email", "Incorrect email or password");
       } else {
         console.error(err);
+        setCustomError("email", err);
       }
     });
   };
