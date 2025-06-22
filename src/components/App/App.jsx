@@ -58,6 +58,14 @@ function App() {
 
   const navigate = useNavigate();
 
+  const handleSubmit = (request) => {
+    setIsLoading(true);
+    request()
+      .then(() => closeActiveModal())
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  };
+
   const handleRegisterClick = () => {
     setActiveModal("register");
   };
@@ -80,41 +88,30 @@ function App() {
     name = "",
     avatar = "",
   }) => {
-    setIsLoading(true);
-    return auth
-      .register(email, password, name, avatar)
-      .then(() => auth.login(email, password))
-      .then((data) => {
-        if (data.token) {
-          return handleTokenLogin(data.token);
-        }
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const makeRequest = () =>
+      auth
+        .register(email, password, name, avatar)
+        .then(() => auth.login(email, password))
+        .then((data) => {
+          if (data.token) {
+            return handleTokenLogin(data.token);
+          }
+        });
+
+    handleSubmit(makeRequest);
   };
 
   const handleLogin = ({ email, password }) => {
-    setIsLoading(true);
+    if (!email || !password) return;
 
-    if (!email || !password) {
-      return;
-    }
-    return auth
-      .login(email, password)
-      .then((data) => {
+    const makeRequest = () =>
+      auth.login(email, password).then((data) => {
         if (data.token) {
           return handleTokenLogin(data.token);
         }
-      })
-      .catch((err) => {
-        console.error(err);
-        throw err;
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
+
+    handleSubmit(makeRequest);
   };
 
   const handleLoginClick = () => {
@@ -129,17 +126,11 @@ function App() {
   };
 
   const handleEditProfileSubmit = (data) => {
-    setIsLoading(true);
-    return api
-      .updateProfile(data)
-      .then((res) => {
+    const makeRequest = () =>
+      api.updateProfile(data).then((res) => {
         setCurrentUser(res.data);
-        closeActiveModal();
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+    handleSubmit(makeRequest);
   };
 
   const handleEditProfileClick = () => {
@@ -191,17 +182,12 @@ function App() {
   };
 
   const handleCardDelete = () => {
-    setIsLoading(true);
-    api
-      .deleteItem(selectedCard._id)
-      .then(() => {
+    const makeRequest = () =>
+      api.deleteItem(selectedCard._id).then(() => {
         fetchClothes();
-        closeActiveModal();
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
       });
+
+    handleSubmit(makeRequest);
   };
 
   const closeActiveModal = () => {
@@ -209,15 +195,14 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ nameInput, imageUrl, weatherType }) => {
-    setIsLoading(true);
-    return api
-      .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
-      .then(() => {
-        fetchClothes();
-        closeActiveModal();
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+    const makeRequest = () =>
+      api
+        .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
+        .then(() => {
+          fetchClothes();
+        });
+
+    handleSubmit(makeRequest);
   };
 
   const fetchClothes = () => {
