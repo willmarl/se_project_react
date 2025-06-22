@@ -3,7 +3,13 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
+function LoginModal({
+  onClose,
+  isOpen,
+  handleLogin,
+  isLoading,
+  setActiveModal,
+}) {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, resetForm, setErrors } =
@@ -39,6 +45,7 @@ function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
       validity={isValid || isLoading}
       extraButton={true}
       extraButtonText="or Register"
+      extrabuttonOnClick={() => setActiveModal("register")}
     >
       <label className={`modal__label ${errors.email ? "modal__error" : ""}`}>
         Email* {errors.email && `${errors.email}`}
