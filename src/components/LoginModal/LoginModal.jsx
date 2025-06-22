@@ -3,7 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-function LoginModal({ onClose, isOpen, handleLogin }) {
+function LoginModal({ onClose, isOpen, handleLogin, isLoading }) {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, resetForm, setErrors } =
@@ -31,12 +31,12 @@ function LoginModal({ onClose, isOpen, handleLogin }) {
 
   return (
     <ModalWithForm
-      buttonText="Next"
+      buttonText={isLoading ? "Logging in..." : "Next"}
       title="Log in"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      validity={isValid}
+      validity={isValid || isLoading}
       extraButton={true}
       extraButtonText="or Register"
     >

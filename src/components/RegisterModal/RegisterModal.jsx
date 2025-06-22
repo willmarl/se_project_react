@@ -3,7 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
-function RegisterModal({ onClose, isOpen, onRegisterSubmit }) {
+function RegisterModal({ onClose, isOpen, onRegisterSubmit, isLoading }) {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, resetForm } =
@@ -26,12 +26,12 @@ function RegisterModal({ onClose, isOpen, onRegisterSubmit }) {
 
   return (
     <ModalWithForm
-      buttonText="Next"
+      buttonText={isLoading ? "Registering..." : "Next"}
       title="Sign up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      validity={isValid}
+      validity={isValid || isLoading}
     >
       <label
         htmlFor="email"

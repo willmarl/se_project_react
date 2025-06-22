@@ -54,6 +54,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -79,6 +80,7 @@ function App() {
     name = "",
     avatar = "",
   }) => {
+    setIsLoading(true);
     return auth
       .register(email, password, name, avatar)
       .then(() => auth.login(email, password))
@@ -87,10 +89,15 @@ function App() {
           return handleTokenLogin(data.token);
         }
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
+
     if (!email || !password) {
       return;
     }
@@ -104,6 +111,9 @@ function App() {
       .catch((err) => {
         console.error(err);
         throw err;
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -119,13 +129,17 @@ function App() {
   };
 
   const handleEditProfileSubmit = (data) => {
+    setIsLoading(true);
     return api
       .updateProfile(data)
       .then((res) => {
         setCurrentUser(res.data);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleEditProfileClick = () => {
@@ -177,13 +191,17 @@ function App() {
   };
 
   const handleCardDelete = () => {
+    setIsLoading(true);
     api
       .deleteItem(selectedCard._id)
       .then(() => {
         fetchClothes();
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const closeActiveModal = () => {
@@ -191,13 +209,15 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ nameInput, imageUrl, weatherType }) => {
+    setIsLoading(true);
     return api
       .uploadItem({ name: nameInput, weather: weatherType, imageUrl })
       .then(() => {
         fetchClothes();
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const fetchClothes = () => {
@@ -299,6 +319,7 @@ function App() {
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
             onAddItemModalSubmit={handleAddItemModalSubmit}
+            isLoading={isLoading}
           />
           <ItemModal
             activeModal={activeModal}
@@ -310,21 +331,25 @@ function App() {
             activeModal={activeModal}
             onClose={closeActiveModal}
             onDelete={handleCardDelete}
+            isLoading={isLoading}
           />
           <RegisterModal
             isOpen={activeModal === "register"}
             onClose={closeActiveModal}
             onRegisterSubmit={handleRegisterSubmit}
+            isLoading={isLoading}
           />
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             handleLogin={handleLogin}
+            isLoading={isLoading}
           />
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
             onEditProfileSubmit={handleEditProfileSubmit}
+            isLoading={isLoading}
           />
         </div>
       </CurrentUserContext.Provider>

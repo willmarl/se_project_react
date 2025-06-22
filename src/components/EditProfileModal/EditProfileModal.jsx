@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-function EditProfileModal({ onClose, isOpen, onEditProfileSubmit }) {
+function EditProfileModal({ onClose, isOpen, onEditProfileSubmit, isLoading }) {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, setErrors } =
@@ -21,18 +21,14 @@ function EditProfileModal({ onClose, isOpen, onEditProfileSubmit }) {
     setCurrentUser({ name: values.name, avatar: values.avatar });
   };
 
-  // const resetInputs = () => {
-  //   setData({ name: currentUser.name, avatar: currentUser.avatar });
-  // };
-
   return (
     <ModalWithForm
-      buttonText="Save changes"
+      buttonText={isLoading ? "Saving..." : "Save changes"}
       title="Change profile data"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      validity={isValid}
+      validity={isValid || isLoading}
     >
       <label
         htmlFor="name"

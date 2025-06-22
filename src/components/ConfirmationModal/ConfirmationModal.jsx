@@ -1,6 +1,6 @@
 import "./ConfirmationModal.css";
 
-function ConfirmationModal({ activeModal, onClose, onDelete }) {
+function ConfirmationModal({ activeModal, onClose, onDelete, isLoading }) {
   return (
     <div
       className={`modal ${activeModal === "confirmation" && "modal_opened"}`}
@@ -17,7 +17,7 @@ function ConfirmationModal({ activeModal, onClose, onDelete }) {
             irreversible.
           </p>
           <button onClick={onDelete} className="modal__delete-btn">
-            Yes, delete item
+            {isLoading ? "Deleting..." : "Yes, delete item"}
           </button>
           <button onClick={onClose} className="modal__cancel-btn">
             Cancel

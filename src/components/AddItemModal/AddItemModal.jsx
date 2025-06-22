@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
+function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
@@ -10,7 +10,6 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
 
   const handleWeatherType = (e) => {
     setWeatherType(e.target.value);
-    console.log(isValid && weatherType !== "");
   };
 
   const handleSubmit = (e) => {
@@ -36,12 +35,16 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit }) {
 
   return (
     <ModalWithForm
-      buttonText="Add garment"
+      buttonText={isLoading ? "Adding..." : "Add garment"}
       title="New garment"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      validity={isValid && weatherType}
+      validity={
+        (isValid && weatherType !== "") ||
+        isLoading ||
+        (isValid && weatherType !== "")
+      }
     >
       <label
         htmlFor="name"
