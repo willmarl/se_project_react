@@ -310,6 +310,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleLogoutClick={handleLogoutClick}
                       handleEditProfileClick={handleEditProfileClick}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
