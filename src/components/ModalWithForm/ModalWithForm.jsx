@@ -29,6 +29,7 @@ function ModalWithForm({
             </button>
             {extraButton && (
               <button
+                type="button"
                 className="modal__extra-button"
                 onClick={extrabuttonOnClick}
               >
