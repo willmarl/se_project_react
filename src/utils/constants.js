@@ -75,4 +75,9 @@ export const coordinates = {
   longitude: -82.458778,
 };
 
+export const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wrcat.jumpingcrab.com"
+    : "http://localhost:3001";
+
 export const APIkey = "fe1aea47e5757f2728255ec91d06ae19";

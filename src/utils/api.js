@@ -1,6 +1,6 @@
 import { getToken } from "./token";
-
-const baseUrl = "http://localhost:3001";
+import { baseUrl } from "./constants";
+const BASE_URL = baseUrl;
 
 export const checkOk = (res) => {
   if (res.ok) {
@@ -11,11 +11,11 @@ export const checkOk = (res) => {
 };
 
 const getItems = () => {
-  return fetch(`${baseUrl}/items`).then((res) => checkOk(res));
+  return fetch(`${BASE_URL}/items`).then((res) => checkOk(res));
 };
 
 const uploadItem = ({ name, weather, imageUrl }) => {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -26,7 +26,7 @@ const uploadItem = ({ name, weather, imageUrl }) => {
 };
 
 const deleteItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}`, {
+  return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -35,7 +35,7 @@ const deleteItem = (id) => {
 };
 
 const updateProfile = ({ name, avatar }) => {
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -46,7 +46,7 @@ const updateProfile = ({ name, avatar }) => {
 };
 
 const addCardLike = (id) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -56,7 +56,7 @@ const addCardLike = (id) => {
 };
 
 const removeCardLike = (id) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${getToken()}`,

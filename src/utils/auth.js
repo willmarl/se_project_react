@@ -1,6 +1,6 @@
 import { checkOk } from "./api";
-
-export const BASE_URL = "http://127.0.0.1:3001";
+import { baseUrl } from "./constants";
+export const BASE_URL = baseUrl;
 
 export const register = (email, password, name = "", avatar = "") => {
   return fetch(`${BASE_URL}/signup`, {
