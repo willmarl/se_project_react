@@ -11,6 +11,7 @@ function ToggleSwitch() {
     <label className="toggle-switch">
       <input
         onChange={handleToggleSwitchChange}
+        checked={currentTemperatureUnit === "F"} // This line controls the checkbox appearance
         type="checkbox"
         className="toggle-switch__checkbox"
       />

@@ -21,30 +21,51 @@ function Header({
     day: "numeric",
   });
 
-  function RenderAuthButtons() {
+  function RenderAuthButtons({ className }) {
     if (isLoggedIn) {
-      return (
-        <div className="header__nav">
-          <button
-            type="button"
-            onClick={handleAddClick}
-            className="header__button"
-          >
-            + Add clothes
-          </button>
+      if (isMobileMenuOpened) {
+        return (
+          <div className={className}>
+            <Link to="/profile" className="header__user-container ">
+              <p className="header__username">{currentUser.name}</p>
+              <Avatar
+                styleName={"header__avatar"}
+                styleNameAlt={"header__avatar-placeholder"}
+              />
+            </Link>
+            <button
+              type="button"
+              onClick={handleAddClick}
+              className="header__button"
+            >
+              + Add clothes
+            </button>
+          </div>
+        );
+      } else {
+        return (
+          <div className={className}>
+            <button
+              type="button"
+              onClick={handleAddClick}
+              className="header__button"
+            >
+              + Add clothes
+            </button>
 
-          <Link to="/profile" className="header__user-container ">
-            <p className="header__username">{currentUser.name}</p>
-            <Avatar
-              styleName={"header__avatar"}
-              styleNameAlt={"header__avatar-placeholder"}
-            />
-          </Link>
-        </div>
-      );
+            <Link to="/profile" className="header__user-container ">
+              <p className="header__username">{currentUser.name}</p>
+              <Avatar
+                styleName={"header__avatar"}
+                styleNameAlt={"header__avatar-placeholder"}
+              />
+            </Link>
+          </div>
+        );
+      }
     } else {
       return (
-        <div className="header__nav">
+        <div className={className}>
           <button onClick={handleRegisterClick} className="header__button">
             Sign Up
           </button>
@@ -56,32 +77,40 @@ function Header({
     }
   }
 
+  function RenderMobileMenu() {
+    if (isMobileMenuOpened) {
+      return (
+        <div className="header__mobile-menu">
+          <button
+            onClick={toggleMobileMenu}
+            type="button"
+            className="header__nav__close-btn"
+          ></button>
+          <ToggleSwitch />
+          <RenderAuthButtons className="header__mobile-auth-btns" />
+        </div>
+      );
+    }
+  }
+
   return (
     <header className="header">
       <Link to="/">
         <img src={logo} alt="WTWR Logo" className="header__logo" />
       </Link>
+      <p className="header__date-location">
+        {currentDate}, {weatherData.city}
+      </p>
       <button
         onClick={toggleMobileMenu}
         type="button"
         className="header__mobile-nav-btn"
       ></button>
-      <p className="header__date-location">
-        {currentDate}, {weatherData.city}
-      </p>
-      <div
-        className={`header__nav ${
-          isMobileMenuOpened ? "header__nav_opened" : ""
-        }`}
-      >
-        <button
-          onClick={toggleMobileMenu}
-          type="button"
-          className="header__nav__close-btn"
-        ></button>
+      <div className="header__nav">
         <ToggleSwitch />
-        <RenderAuthButtons />
+        <RenderAuthButtons className="header__nav" />
       </div>
+      <RenderMobileMenu />
     </header>
   );
 }
